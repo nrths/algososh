@@ -73,7 +73,7 @@ export const StringComponent: React.FC = () => {
           maxLength={11}
           onChange={(e) => handleChange(e)}
         />
-        <Button text="Развернуть" type="submit" disabled={buttonState}/>
+        <Button text="Развернуть" type="submit" isLoader={buttonState} disabled={string.length < 2}/>
       </form>
       <div className={styles.algorithm}>
         {array.map((item) => {

@@ -1,0 +1,39 @@
+.form {
+    margin: 0 auto;
+    /* max-width: 522px; */
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    /* gap: 12px; */
+}
+
+.radioGroup {
+    display: flex;
+    flex-direction: row;
+    margin-right: 52px;
+    gap: 40px;
+}
+
+.directionButtons {
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+}
+
+.button {
+    width: 205px;
+}
+
+.newArrButton {
+    width: 168px;
+}
+
+.columns {
+    margin : 48px auto 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 10px;
+}
