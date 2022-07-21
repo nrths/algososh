@@ -1,0 +1,55 @@
+.forms_container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-width: 952px;
+    align-items: flex-start;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+.form {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 12px;
+}
+
+.input {
+    width: 204px;
+}
+
+.value_button {
+    width: 175px;
+}
+
+.index_button {
+    width: 362px;
+}
+
+.circles_container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 17px;
+    margin-top: 120px;
+}
+
+.circle {
+    display: flex;
+    align-items: center;
+    gap: 17px;
+    position: relative;
+}
+
+.add_circle {
+    position: absolute;
+    bottom: 120px;
+    left: 14px;  
+}
+
+.remove_circle {
+    position: absolute;
+    top: 120px;
+    left: 10px;
+}
