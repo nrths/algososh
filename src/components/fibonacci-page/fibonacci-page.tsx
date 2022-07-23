@@ -45,8 +45,9 @@ export const FibonacciPage: React.FC = () => {
           type="number"
           max={19}
           onChange={(e) => handleChange(e)}
+          value={input !== 0 ? input : ''}
         />
-        <Button text="Рассчитать" type="submit" isLoader={buttonState} disabled={input > 19}/>
+        <Button text="Рассчитать" type="submit" isLoader={buttonState} disabled={input <= 0 || input > 19}/>
       </form>
       <div className={styles.algorithm}>
         {sequence.map((item, index) => {

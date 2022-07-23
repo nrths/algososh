@@ -26,19 +26,15 @@ export const StackPage: React.FC = () => {
     e.preventDefault();
     setAddButtonState(true);
 
-    if (input === "") {
-      alert("Нечего добавить в стек, введите что-то в поле ввода.") // TODO: popup
-    } else {
-      stack.push(input);
-      stackItems.push({ value: stack.peak(), state: ElementStates.Changing });
-      setStackItems([...stackItems]);
-      setInput("");
+    stack.push(input);
+    stackItems.push({ value: stack.peak(), state: ElementStates.Changing });
+    setStackItems([...stackItems]);
+    setInput("");
 
-      await delay(DELAY_IN_MS);
+    await delay(DELAY_IN_MS);
 
-      stackItems[stackItems.length - 1].state = ElementStates.Default;
-      setStackItems([...stackItems]);
-    }
+    stackItems[stackItems.length - 1].state = ElementStates.Default;
+    setStackItems([...stackItems]);
 
     setAddButtonState(false);
   };
@@ -84,7 +80,9 @@ export const StackPage: React.FC = () => {
           <Input
             isLimitText={true}
             maxLength={4}
-            onChange={(e) => {handleChange(e)}}
+            onChange={(e) => {
+              handleChange(e);
+            }}
             value={input}
             disabled={input.length > 4}
             extraClass={styles.input}
@@ -93,14 +91,14 @@ export const StackPage: React.FC = () => {
             text="Добавить"
             type="submit"
             isLoader={addButtonState}
-            disabled={removeButtonState || clearButtonState}
+            disabled={removeButtonState || clearButtonState || input === ""}
           />
           <Button
             text="Удалить"
             type="button"
             onClick={removeItem}
             isLoader={removeButtonState}
-            disabled={addButtonState || clearButtonState}
+            disabled={addButtonState || clearButtonState || stackItems.length === 0}
           />
         </div>
         <Button
@@ -108,7 +106,7 @@ export const StackPage: React.FC = () => {
           type="reset"
           onClick={clearStack}
           isLoader={clearButtonState}
-          disabled={removeButtonState || addButtonState}
+          disabled={removeButtonState || addButtonState || stackItems.length === 0}
         />
       </form>
       <div className={styles.stack}>

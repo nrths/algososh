@@ -30,54 +30,50 @@ export const QueuePage: React.FC = () => {
     setInput(e.currentTarget.value);
   };
 
-  const addItem = async () => {
+  const addItem = async (e: SyntheticEvent<HTMLFormElement>) => {
+    e.preventDefault();
     setAddButtonState(true);
 
-    if (input === "") {
-      alert("Нечего добавить в очередь, введите что-то в поле ввода."); // TODO: popup
-    } else {
-      setInput("");
+    setInput("");
 
-      queue.enqueue(input);
-      array[queue.getHead()].head = true;
+    queue.enqueue(input);
+    array[queue.getHead()].head = true;
 
-      if (queue.getTail() > 0) {
-        array[queue.getTail() - 1].tail = false;
-      }
-
-      array[queue.getTail()].content = input;
-      array[queue.getTail()].tail = true;
-      array[queue.getTail()].state = ElementStates.Changing;
-
-      await delay(DELAY_IN_MS);
-
-      array[queue.getTail()].state = ElementStates.Default;
+    if (queue.getTail() > 0) {
+      array[queue.getTail() - 1].tail = false;
     }
+
+    array[queue.getTail()].content = input;
+    array[queue.getTail()].tail = true;
+    array[queue.getTail()].state = ElementStates.Changing;
+
+    await delay(DELAY_IN_MS);
+
+    array[queue.getTail()].state = ElementStates.Default;
+
     setAddButtonState(false);
   };
 
   const removeItem = async () => {
     setRemoveButtonState(true);
-    if (input === "" && queue.isEmpty()) {
-      alert("Очередь пуста, нечего удалять!"); // TODO: popup
+
+    if (queue.getHead() === queue.getTail()) {
+      clearQueue();
     } else {
-      if (queue.getHead() === queue.getTail()) {
-        clearQueue();
-      } else {
-        queue.dequeue();
-        array[queue.getHead() - 1].state = ElementStates.Changing;
+      queue.dequeue();
+      array[queue.getHead() - 1].state = ElementStates.Changing;
 
-        await delay(DELAY_IN_MS);
+      await delay(DELAY_IN_MS);
 
-        array[queue.getHead() - 1].state = ElementStates.Default;
+      array[queue.getHead() - 1].state = ElementStates.Default;
 
-        if (queue.getHead() > 0) {
-          array[queue.getHead() - 1].head = false;
-          array[queue.getHead() - 1].content = "";
-        }
-        array[queue.getHead()].head = true;
+      if (queue.getHead() > 0) {
+        array[queue.getHead() - 1].head = false;
+        array[queue.getHead() - 1].content = "";
       }
+      array[queue.getHead()].head = true;
     }
+
     setRemoveButtonState(false);
   };
 
@@ -93,29 +89,30 @@ export const QueuePage: React.FC = () => {
   console.log(array);
   return (
     <SolutionLayout title="Очередь">
-      <form className={styles.form}>
+      <form className={styles.form} onSubmit={(e) => addItem(e)}>
         <div className={styles.controls}>
           <Input
             isLimitText={true}
             maxLength={4}
-            onChange={(e) => {handleChange(e)}}
+            onChange={(e) => {
+              handleChange(e);
+            }}
             value={input}
             disabled={input.length > 4}
             extraClass={styles.input}
           />
           <Button
             text="Добавить"
-            type="button"
-            onClick={addItem}
+            type="submit"
             isLoader={addButtonState}
-            disabled={removeButtonState || clearButtonState}
+            disabled={removeButtonState || clearButtonState || input === ""}
           />
           <Button
             text="Удалить"
             type="button"
             onClick={removeItem}
             isLoader={removeButtonState}
-            disabled={addButtonState || clearButtonState}
+            disabled={addButtonState || clearButtonState || queue.isEmpty()}
           />
         </div>
         <Button
@@ -123,7 +120,7 @@ export const QueuePage: React.FC = () => {
           type="reset"
           onClick={clearQueue}
           isLoader={clearButtonState}
-          disabled={removeButtonState || addButtonState}
+          disabled={removeButtonState || addButtonState || queue.isEmpty()}
         />
       </form>
       <div className={styles.queue}>

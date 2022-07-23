@@ -1,4 +1,3 @@
-import { TListItem } from "../components/list-page/list-page";
 import IColumn from "../components/sorting-page/sorting-page";
 import { TInputStringArray } from "../components/string/string";
 import { ElementStates } from "../types/element-states";
@@ -35,13 +34,15 @@ export const calculateFibonacciSequence = (
 export const getRandomInRange = (
   min: number,
   max: number
-): IColumn | TListItem => {
+): IColumn => {
   return {
     number: Math.floor(Math.random() * (max - min + 1) + min),
     state: ElementStates.Default,
-    head: false,
-    tail: false,
-    isAdded: false,
-    isRemoved: false,
   };
 };
+
+// for linked list only number type, not used now
+export const createRandomArray = (length: number, max: number) => {
+  const randomArray: number[] | string[] = [...new Array(length)].map(() => Math.round(Math.random() * max))
+  return randomArray
+}
