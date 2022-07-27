@@ -18,7 +18,7 @@ export const Input: React.FC<InputProps> = ({
 }) => {
   const limitText =
     type === "text"
-      ? `Максимум — ${maxLength} символа`
+      ? `Максимум — ${maxLength} символ${(maxLength === 2 || maxLength === 3 || maxLength === 4) ? 'а' : 'ов'}`
       : `Максимальное число — ${max}`;
 
   return (
