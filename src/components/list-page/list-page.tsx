@@ -290,6 +290,7 @@ export const ListPage: React.FC = () => {
             disabled={valueInput.length > 4}
             extraClass={styles.input}
             placeholder="Введите значение"
+            data-cy='value-input'
           />
           <Button
             text="Добавить в head"
@@ -305,6 +306,7 @@ export const ListPage: React.FC = () => {
               valueInput === "" || array.length >= 8
             }
             extraClass={styles.value_button}
+            data-cy='add-to-head'
           />
           <Button
             text="Добавить в tail"
@@ -320,6 +322,7 @@ export const ListPage: React.FC = () => {
               valueInput === "" || array.length >= 8
             }
             extraClass={styles.value_button}
+            data-cy='add-to-tail'
           />
           <Button
             text="Удалить из head"
@@ -334,6 +337,7 @@ export const ListPage: React.FC = () => {
               removeItemByIndexButtonState || array.length <= 1
             }
             extraClass={styles.value_button}
+            data-cy='remove-from-head'
           />
           <Button
             text="Удалить из tail"
@@ -348,6 +352,7 @@ export const ListPage: React.FC = () => {
               removeItemByIndexButtonState || array.length <= 1
             }
             extraClass={styles.value_button}
+            data-cy='remove-from-tail'
           />
         </form>
         <form className={styles.form} onSubmit={(e) => handleSubmit(e)}>
@@ -357,6 +362,7 @@ export const ListPage: React.FC = () => {
             value={indexInput || ''}
             extraClass={styles.input}
             placeholder="Введите индекс"
+            data-cy='index-input'
           />
           <Button
             text="Добавить по индексу"
@@ -371,6 +377,7 @@ export const ListPage: React.FC = () => {
               removeItemByIndexButtonState ||
               (indexInput !==0 && valueInput === '') || !indexInput || array.length >= 8 || indexInput > array.length - 1}
             extraClass={styles.index_button}
+            data-cy='add-by-index'
           />
           <Button
             text="Удалить по индексу"
@@ -386,6 +393,7 @@ export const ListPage: React.FC = () => {
               array.length <= 1 || !indexInput || indexInput > array.length - 1
             }
             extraClass={styles.index_button}
+            data-cy='remove-by-index'
           />
         </form>
       </div>

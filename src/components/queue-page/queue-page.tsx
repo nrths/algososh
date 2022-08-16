@@ -106,6 +106,7 @@ export const QueuePage: React.FC = () => {
             type="submit"
             isLoader={addButtonState}
             disabled={removeButtonState || clearButtonState || input === ""}
+            data-cy='add'
           />
           <Button
             text="Удалить"
@@ -113,6 +114,7 @@ export const QueuePage: React.FC = () => {
             onClick={removeItem}
             isLoader={removeButtonState}
             disabled={addButtonState || clearButtonState || queue.isEmpty()}
+            data-cy='remove'
           />
         </div>
         <Button
@@ -121,6 +123,7 @@ export const QueuePage: React.FC = () => {
           onClick={clearQueue}
           isLoader={clearButtonState}
           disabled={removeButtonState || addButtonState || queue.isEmpty()}
+          data-cy='clear'
         />
       </form>
       <div className={styles.queue}>
