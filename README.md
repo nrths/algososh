@@ -20,7 +20,7 @@
 * [Макет Figma](https://www.figma.com/file/RIkypcTQN5d37g7RRTFid0/Algososh_external_link?node-id=0%3A1)
 ## Локальный запуск
 
-Кланируйте репозиторий
+Клонируйте репозиторий
 ```bash
   git clone https://github.com/nrths/algososh.git
 ```
