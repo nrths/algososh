@@ -92,6 +92,7 @@ export const StackPage: React.FC = () => {
             type="submit"
             isLoader={addButtonState}
             disabled={removeButtonState || clearButtonState || input === ""}
+            data-cy='add'
           />
           <Button
             text="Удалить"
@@ -99,6 +100,7 @@ export const StackPage: React.FC = () => {
             onClick={removeItem}
             isLoader={removeButtonState}
             disabled={addButtonState || clearButtonState || stackItems.length === 0}
+            data-cy='remove'
           />
         </div>
         <Button
@@ -107,6 +109,7 @@ export const StackPage: React.FC = () => {
           onClick={clearStack}
           isLoader={clearButtonState}
           disabled={removeButtonState || addButtonState || stackItems.length === 0}
+          data-cy='clear'
         />
       </form>
       <div className={styles.stack}>
